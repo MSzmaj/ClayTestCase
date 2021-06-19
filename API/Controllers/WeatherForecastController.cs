@@ -13,7 +13,7 @@ namespace API.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cold", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing", "Bracing", "Chilly", "Cold", "Mild", "Warm", "Balmy", "Hawt", "Sweltering", "Scorching"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
