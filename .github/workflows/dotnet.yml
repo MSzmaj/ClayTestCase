@@ -24,4 +24,5 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity quiet
     - name: Install dependencies
-      run: dotnet add Repository/Repository.csproj package Dapper --version 2.0.9
+      run: dotnet add Infrastructure/Infrastructure.csproj package Dapper --version 2.0.9
+      run: dotnet add API/API.csproj package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1
