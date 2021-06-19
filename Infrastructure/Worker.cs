@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Repository
+namespace Infratructure
 {
     public class Worker : BackgroundService
     {

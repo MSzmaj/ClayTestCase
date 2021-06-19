@@ -1,10 +1,18 @@
-﻿using System;
+﻿using Application.TypeMappings;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace API.AppStart
 {
-    public class TypeMappingConfigurator
+    public static class TypeMappingConfigurator
     {
-        public TypeMappingConfigurator()
+        public static void ConfigureTypeMappings(IServiceCollection services)
         {
+            ConfigureDomainToApplicationTypeMappings(services);
+        }
+
+        private static void ConfigureDomainToApplicationTypeMappings (IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(TokenToTokenModel));
         }
     }
 }
