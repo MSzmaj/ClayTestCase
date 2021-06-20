@@ -27,3 +27,6 @@ jobs:
       run: |
         dotnet add Infrastructure/Infrastructure.csproj package Dapper --version 2.0.9
         dotnet add API/API.csproj package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.1.1
+        dotnet add API/API.csproj package IdentityServer4 --version 4.1.2
+        dotnet add API/API.csproj package IdentityServer4.AccessTokenValidation --version 3.0.1
+        dotnet add API/API.csproj package Microsoft.AspNetCore.Authentication.JwtBearer --version 5.0.7
