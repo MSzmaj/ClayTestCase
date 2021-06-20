@@ -20,6 +20,8 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            OpenIdConfigurator.ConfigureIdentityServer(services);
             DependencyInjector.ConfigureDependencies(services);
             TypeMappingConfigurator.ConfigureTypeMappings(services);
             services.AddControllers();
@@ -43,11 +45,16 @@ namespace API
 
             app.UseRouting();
 
+            app.UseIdentityServer();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+                .RequireAuthorization("Admin");
             });
         }
     }

@@ -3,11 +3,12 @@ using Microsoft.Extensions.Logging;
 using Application.Models;
 using System.Collections.Generic;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class TokenController : ControllerBase
     {
         private readonly ILogger<TokenController> _logger;
@@ -21,6 +22,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("api/get-all-tokens")]
+        [Authorize(Policy = "Admin")]
         public IEnumerable<TokenModel> GetAllTokens()
         {
             return _tokenService.GetAllTokens();
