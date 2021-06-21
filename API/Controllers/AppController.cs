@@ -1,10 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 namespace API.Controllers
 {
-    public class AppController
+    [ApiController]
+    public class AppController : ControllerBase
     {
-        public AppController()
+        private readonly ILogger<TokenController> _logger;
+
+        public AppController(ILogger<TokenController> logger)
         {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public string HealthCheck()
+        {
+            return "API is running";
         }
     }
 }
