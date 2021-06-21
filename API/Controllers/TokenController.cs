@@ -23,7 +23,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("api/get-all-tokens")]
-        [Authorize(Policy = "Admin")]
+        [AllowAnonymous]
         public IEnumerable<TokenModel> GetAllTokens()
         {
             return _tokenService.GetAllTokens();
