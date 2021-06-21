@@ -24,6 +24,11 @@ namespace API.AppStart
                     policy.RequireAuthenticatedUser();
                     policy.RequireClaim("scope", "admin");
                 });
+                options.AddPolicy("User", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "user");
+                });
             });
 
             services.AddIdentityServer()

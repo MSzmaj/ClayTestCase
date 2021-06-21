@@ -23,7 +23,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("api/get-all-tokens")]
-        [AllowAnonymous]
+        [Authorize(Policy = "Admin")]
         public IEnumerable<TokenModel> GetAllTokens()
         {
             return _tokenService.GetAllTokens();
@@ -31,7 +31,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/add")]
-        [Authorize(Policy = "Admin")]
+        [Authorize(Policy = "User")]
         public void AddToken (TokenModel inputModel)
         {
             _tokenService.AddToken(inputModel);

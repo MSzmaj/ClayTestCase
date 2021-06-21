@@ -7,7 +7,8 @@ namespace API.OpenID
     {
         public static IEnumerable<ApiScope> GetApiScopes =>
             new List<ApiScope> {
-                new ApiScope("admin", "Admin Acces")
+                new ApiScope("admin", "Admin Acces"),
+                new ApiScope("user", "User Acces")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -18,6 +19,12 @@ namespace API.OpenID
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = new List<Secret> {new Secret("password".Sha256())},
                     AllowedScopes = new List<string> {"admin"}
+                },
+                new Client {
+                    ClientId = "user_client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets = new List<Secret> {new Secret("password".Sha256())},
+                    AllowedScopes = new List<string> {"user"}
                 }
             };
     }
