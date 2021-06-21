@@ -18,14 +18,12 @@ namespace API
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((HostBuilderContext, config) => {
-                    if (HostBuilderContext.HostingEnvironment.IsProduction()) {
-                        var builtConfig = config.Build();
-                        var uri = new Uri($"https://{builtConfig["KeyVaultName"]}.vault.azure.net/");
-                        var secretClient = new SecretClient(
-                            uri, new DefaultAzureCredential()
-                        );
-                        config.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
-                    }
+                    var builtConfig = config.Build();
+                    var uri = new Uri($"https://{builtConfig["KeyVaultName"]}.vault.azure.net/");
+                    var secretClient = new SecretClient(
+                        uri, new DefaultAzureCredential()
+                    );
+                    config.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
