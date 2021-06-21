@@ -15,7 +15,7 @@ namespace Common.Config
         public string GetDbConnectionString ()
         {
             var connectionString = _configuration["ConnectionStrings:DefaultConnection"];
-            var connectionPassword = $"Password= {_configuration["ConnectionStringPassword"]}";
+            var connectionPassword = $"Password={_configuration["ConnectionStringPassword"]}";
             Console.WriteLine($"{connectionString}{connectionPassword}");
             return $"{connectionString}{connectionPassword}";
         }
