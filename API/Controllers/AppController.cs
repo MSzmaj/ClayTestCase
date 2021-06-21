@@ -14,6 +14,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("api/healthcheck")]
         public string HealthCheck()
         {
             return "API is running";
