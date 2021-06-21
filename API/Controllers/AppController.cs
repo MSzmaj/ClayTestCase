@@ -18,9 +18,9 @@ namespace API.Controllers
         [HttpGet]
         [Route("api/healthcheck")]
         [AllowAnonymous]
-        public string HealthCheck()
+        public IActionResult HealthCheck()
         {
-            return "API is running";
+            return Ok("API is running");
         }
     }
 }

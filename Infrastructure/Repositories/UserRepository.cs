@@ -8,35 +8,33 @@ using Infrastructure.DatabaseAccess.Queries;
 
 namespace Infratructure.Repositories
 {
-    public class TokenRepository : ITokenRepository {
+    public class UserRepository : IUserRepository {
         private readonly AppConfig _appConfig;
 
-        public TokenRepository(AppConfig appConfig)
+        public UserRepository(AppConfig appConfig)
         {
             _appConfig = appConfig;
         }
 
-        public IEnumerable<Token> GetTokens()
+        public IEnumerable<User> GetUsers()
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
-            var query = string.Format(TokenQuery.BaseQuery, string.Join(",", TokenQuery.Columns));
+            var query = string.Format(UserQuery.BaseQuery, string.Join(",", UserQuery.Columns));
             var commandDefinition = new CommandDefinition(query);
-            return connection.Query<Token>(commandDefinition);
+            return connection.Query<User>(commandDefinition);
         }
 
-        public int Add(Token inputModel)
+        public int Add(User inputModel)
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { TokenQuery.Column.OwnerId, TokenQuery.Column.Expiry };
-            var parameters = new string[] { TokenQuery.Parameter.OwnerId, TokenQuery.Parameter.Expiry };
+            var columns = new string[] {  };
+            var parameters = new string[] { };
 
-            var query = string.Format(TokenQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
+            var query = string.Format(UserQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
-                inputModel.OwnerId,
-                inputModel.Expiry
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);

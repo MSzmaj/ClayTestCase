@@ -5,20 +5,22 @@ using Application.Models;
 using AutoMapper;
 using System.Linq;
 using Domain.Models;
+using Application.Validators.Interfaces;
 
 namespace Application.Services
 {
     public class TokenService : ITokenService
     {
         private readonly ITokenRepository _tokenRepository;
+        private readonly ITokenValidator _tokenValidator;
 
         private readonly IMapper _mapper;
 
-        public TokenService(ITokenRepository tokenRepository,
-                            IMapper mapper)
+        public TokenService(ITokenRepository tokenRepository, IMapper mapper, ITokenValidator tokenValidator)
         {
             _tokenRepository = tokenRepository;
             _mapper = mapper;
+            _tokenValidator = tokenValidator;
         }
 
         public IEnumerable<TokenModel> GetAllTokens()
@@ -27,10 +29,11 @@ namespace Application.Services
             return tokens.Select(x => _mapper.Map<TokenModel>(x)).ToList();
         }
 
-        public void AddToken(TokenModel token)
+        public string AddToken(TokenModel token)
         {
+            token.Validate(_tokenValidator);
             var inputModel = _mapper.Map<Token>(token);
-            _tokenRepository.Add(inputModel);
+            return _tokenRepository.Add(inputModel).ToString();
         }
     }
 }

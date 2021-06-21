@@ -6,6 +6,6 @@ namespace Domain.Repositories
     public interface ITokenRepository
     {
         IEnumerable<Token> GetTokens();
-        void Add(Token inputModel);
+        int Add(Token inputModel);
     }
 }

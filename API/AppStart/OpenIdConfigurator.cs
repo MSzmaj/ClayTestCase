@@ -2,15 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using API.OpenID;
 using Microsoft.IdentityModel.Tokens;
-
+using Common;
 namespace API.AppStart
 {
     public static class OpenIdConfigurator
     {
         public static void ConfigureIdentityServer(IServiceCollection services)
         {
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication("Bearer", options =>
+            services.AddAuthentication(Constants.Auth.Bearer)
+                .AddIdentityServerAuthentication(Constants.Auth.Bearer, options =>
                 {
                     //options.Authority = "https://localhost:5001";
                     options.Authority = "https://claytestcase.azurewebsites.net";

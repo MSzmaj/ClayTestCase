@@ -8,35 +8,33 @@ using Infrastructure.DatabaseAccess.Queries;
 
 namespace Infratructure.Repositories
 {
-    public class TokenRepository : ITokenRepository {
+    public class LogRepository : ILogRepository {
         private readonly AppConfig _appConfig;
 
-        public TokenRepository(AppConfig appConfig)
+        public LogRepository(AppConfig appConfig)
         {
             _appConfig = appConfig;
         }
 
-        public IEnumerable<Token> GetTokens()
+        public IEnumerable<Log> GetLogs()
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
-            var query = string.Format(TokenQuery.BaseQuery, string.Join(",", TokenQuery.Columns));
+            var query = string.Format(LogQuery.BaseQuery, string.Join(",", LogQuery.Columns));
             var commandDefinition = new CommandDefinition(query);
-            return connection.Query<Token>(commandDefinition);
+            return connection.Query<Log>(commandDefinition);
         }
 
-        public int Add(Token inputModel)
+        public int Add(Log inputModel)
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { TokenQuery.Column.OwnerId, TokenQuery.Column.Expiry };
-            var parameters = new string[] { TokenQuery.Parameter.OwnerId, TokenQuery.Parameter.Expiry };
+            var columns = new string[] { LogQuery.Column.OwnerId};
+            var parameters = new string[] { LogQuery.Parameter.OwnerId};
 
-            var query = string.Format(TokenQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
+            var query = string.Format(LogQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
-                inputModel.OwnerId,
-                inputModel.Expiry
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);
