@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
     [ApiController]
+    [Authorize]
     public class AppController : ControllerBase
     {
         private readonly ILogger<TokenController> _logger;
@@ -15,6 +17,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("api/healthcheck")]
+        [AllowAnonymous]
         public string HealthCheck()
         {
             return "API is running";
