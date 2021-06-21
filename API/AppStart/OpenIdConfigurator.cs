@@ -11,7 +11,8 @@ namespace API.AppStart
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:5001";
+                    //options.Authority = "https://localhost:5001";
+                    options.Authority = "https://claytestcase.azurewebsites.net"
                 });
 
             services.AddAuthorization(options =>
