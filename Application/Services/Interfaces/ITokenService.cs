@@ -7,5 +7,6 @@ namespace Application.Services.Interfaces
     public interface ITokenService
     {
         IEnumerable<TokenModel> GetAllTokens();
+        void AddToken(TokenModel token);
     }
 }

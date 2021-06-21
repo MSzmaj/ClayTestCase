@@ -6,5 +6,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Npgsql" />
+    <None Remove="Dapper" />
+    <None Remove="DatabaseAccess\" />
+    <None Remove="DatabaseAccess\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="5.0.7" />
+    <PackageReference Include="Dapper" Version="2.0.90" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatabaseAccess\" />
+    <Folder Include="DatabaseAccess\Queries\" />
   </ItemGroup>
 </Project>

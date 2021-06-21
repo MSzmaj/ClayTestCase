@@ -3,6 +3,7 @@ using Application.Services.Interfaces;
 using Application.Services;
 using Domain.Repositories;
 using Infratructure.Repositories;
+using Common.Config;
 
 namespace API.AppStart
 {
@@ -21,8 +22,7 @@ namespace API.AppStart
 
         private static void ConfigureRepositories(IServiceCollection services)
         {
-            //services.AddSingleton<Repository.Common.AppConfig>();
-            //services.AddSingleton<Repository.DataAccess.DatabaseContext>();
+            services.AddSingleton<AppConfig>();
             services.AddTransient<ITokenRepository, TokenRepository>();
         }
     }

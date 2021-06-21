@@ -28,5 +28,13 @@ namespace API.Controllers
         {
             return _tokenService.GetAllTokens();
         }
+
+        [HttpPost]
+        [Route("api/add")]
+        [Authorize(Policy = "Admin")]
+        public void AddToken (TokenModel inputModel)
+        {
+            _tokenService.AddToken(inputModel);
+        }
     }
 }

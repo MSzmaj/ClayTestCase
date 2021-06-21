@@ -4,8 +4,8 @@ namespace Domain.Models
 {
     public class Token
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public DateTime Expiry { get; set; }
-        public string OwnerId { get; set; }
+        public int OwnerId { get; set; }
     }
 }
