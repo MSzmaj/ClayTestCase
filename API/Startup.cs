@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using API.AppStart;
+using Microsoft.IdentityModel.Logging;
 
 namespace API
 {
@@ -25,6 +26,7 @@ namespace API
             DependencyInjector.ConfigureDependencies(services);
             TypeMappingConfigurator.ConfigureTypeMappings(services);
             services.AddControllers();
+            IdentityModelEventSource.ShowPII = true;
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
