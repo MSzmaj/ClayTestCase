@@ -26,7 +26,7 @@ namespace API.AppStart
 
             services.AddIdentityServer()
                 .AddInMemoryClients(Resources.Clients)
-                .AddInMemoryApiScopes(Resources.GetApiScopes)
+                .AddInMemoryApiScopes(Resources.GetApiScopes);
                 //.AddDeveloperSigningCredential();
         }
     }
