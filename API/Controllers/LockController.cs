@@ -1,10 +1,12 @@
 using System.Linq;
 using Application.Models;
 using Application.Services.Interfaces;
+using Application.Validators.Interfaces;
 using Common.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Common;
 
 namespace API.Controllers {
 
@@ -13,17 +15,24 @@ namespace API.Controllers {
     public class LockController : ControllerBase {
         private readonly ILogger<LockController> _logger;
         private readonly ILockService _lockService;
+        private readonly IUserValidator _userValidator;
 
-        public LockController (ILockService lockService, ILogger<LockController> logger) {
+        public LockController (ILockService lockService,
+                                ILogger<LockController> logger,
+                                IUserValidator userValidator) {
             _lockService = lockService;
             _logger = logger;
+            _userValidator = userValidator;
         }
 
         [HttpPost]
         [Route("api/register-lock")]
         [Authorize(Policy = "User")]
         public IActionResult RegisterLock (LockModel lockModel) {
-            var lockId = string.Empty;
+            _userValidator.ValidateClaimId(lockModel.OwnerId.ToString(),
+                User.Identity.GetClaimId().ToString());
+
+            string lockId;
             try {
                 lockId = _lockService.AddLock(lockModel);
             } catch (ModelValidationException exception) {

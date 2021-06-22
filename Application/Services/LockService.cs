@@ -31,6 +31,7 @@ namespace Application.Services
 
         public string AddLock(LockModel lockModel)
         {
+            
             lockModel.Validate(_lockValidator);
             var inputModel = _mapper.Map<Lock>(lockModel);
             return _lockRepository.Add(inputModel).ToString();

@@ -55,8 +55,7 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()
-                .RequireAuthorization("Admin");
+                endpoints.MapControllers();
             });
         }
     }

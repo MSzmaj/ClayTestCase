@@ -13,6 +13,7 @@ namespace API.AppStart
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
+            services.AddSingleton<AppConfig>();
             ConfigureRepositories(services);
             ConfigureValidators(services);
             ConfigureServices(services);
@@ -21,6 +22,9 @@ namespace API.AppStart
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<ILockService, LockService>();
+            services.AddTransient<ILogService, LogService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         private static void ConfigureValidators(IServiceCollection services) {
@@ -32,8 +36,10 @@ namespace API.AppStart
 
         private static void ConfigureRepositories(IServiceCollection services)
         {
-            services.AddSingleton<AppConfig>();
             services.AddTransient<ITokenRepository, TokenRepository>();
+            services.AddTransient<ILockRepository, LockRepository>();
+            services.AddTransient<ILogRepository, LogRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }
