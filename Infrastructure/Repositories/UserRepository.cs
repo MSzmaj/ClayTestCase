@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+    using System.Collections.Generic;
 using Common.Config;
 using Domain.Models;
 using Domain.Repositories;
@@ -34,7 +34,7 @@ namespace Infratructure.Repositories
                 UserQuery.Parameter.Email,
             };
 
-            var query = string.Format(UserQuery.Insert, string.Join(",", TokenQuery.Columns), string.Join(",", parameters));
+            var query = string.Format(UserQuery.Insert, string.Join(",", UserQuery.Columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
@@ -45,7 +45,38 @@ namespace Infratructure.Repositories
 
             var commandDefinition = new CommandDefinition(query, queryParameters);
 
-            return connection.Execute(commandDefinition);
+            return connection.ExecuteScalar<int>(commandDefinition);
+        }
+
+        public User FindByCriteria(User user) {
+           using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
+
+            var query = UserQuery.FindByCriteria;
+
+            var queryParameters = new
+            {
+                user.Email,
+                user.UserName
+            };
+
+            var commandDefinition = new CommandDefinition(query, queryParameters);
+
+            return connection.QueryFirstOrDefault<User>(commandDefinition);
+        }
+
+        public User FindById(int id) {
+            using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
+
+            var query = string.Format(UserQuery.FindById, UserQuery.Parameter.Id);
+
+            var queryParameters = new
+            {
+                id
+            };
+
+            var commandDefinition = new CommandDefinition(query, queryParameters);
+
+            return connection.QueryFirstOrDefault<User>(commandDefinition); 
         }
     }
 }

@@ -37,7 +37,22 @@ namespace Infratructure.Repositories
 
             var commandDefinition = new CommandDefinition(query, queryParameters);
 
-            return connection.Execute(commandDefinition);
+            return connection.ExecuteScalar<int>(commandDefinition);
+        }
+
+        public Lock FindById(int id) {
+            using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
+
+            var query = string.Format(LockQuery.FindById, LockQuery.Parameter.Id);
+
+            var queryParameters = new
+            {
+                id
+            };
+
+            var commandDefinition = new CommandDefinition(query, queryParameters);
+
+            return connection.QueryFirstOrDefault<Lock>(commandDefinition); 
         }
     }
 }

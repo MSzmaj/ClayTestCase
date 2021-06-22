@@ -7,5 +7,6 @@ namespace Domain.Repositories
     {
         IEnumerable<Lock> GetLocks();
         int Add(Lock inputModel);
+        Lock FindById (int id);
     }
 }

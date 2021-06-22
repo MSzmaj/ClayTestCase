@@ -9,7 +9,6 @@ namespace Infrastructure.DatabaseAccess.Queries
 
         public static readonly string[] Columns =
         {
-            Column.Id,
             Column.LockId,
             Column.UserId,
             Column.TokenId,

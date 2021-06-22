@@ -11,9 +11,15 @@ namespace Application.Models
         public DateTime Expiry { get; set; }
         [Required]
         public int OwnerId { get; set; }
+        [Required]
+        public int LockId { get; set; }
 
-        public virtual void Validate(ITokenValidator tokenValidator) {
-            tokenValidator.Validate(this);
+        public virtual void Validate(ITokenValidator tokenValidator,
+                                        IUserValidator userValidator,
+                                        ILockValidator lockValidator) {
+            tokenValidator.ValidateTokenId(Id);
+            userValidator.ValidateUserId(OwnerId);
+            lockValidator.ValidateLockId(LockId);
         }
     }
 }

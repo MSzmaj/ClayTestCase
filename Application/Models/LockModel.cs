@@ -8,8 +8,10 @@ namespace Application.Models
 
         public int OwnerId { get; set; }
 
-        public virtual void Validate(ILockValidator lockValidator) {
-            
+        public virtual void Validate(ILockValidator lockValidator,
+                                    IUserValidator userValidator) {
+            lockValidator.ValidateLockId(Id);
+            userValidator.ValidateUserId(OwnerId);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Domain.Models
         public int Id { get; set; }
         public DateTime Expiry { get; set; }
         public int OwnerId { get; set; }
+        public int LockId { get; set; }
     }
 }

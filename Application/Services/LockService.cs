@@ -13,14 +13,19 @@ namespace Application.Services
     {
         private readonly ILockRepository _lockRepository;
         private readonly ILockValidator _lockValidator;
+        private readonly IUserValidator _userValidator;
 
         private readonly IMapper _mapper;
 
-        public LockService(ILockRepository lockRepository, IMapper mapper, ILockValidator lockValidator)
+        public LockService(ILockRepository lockRepository, 
+                            IMapper mapper, 
+                            ILockValidator lockValidator,
+                            IUserValidator userValidator)
         {
             _lockRepository = lockRepository;
             _mapper = mapper;
             _lockValidator = lockValidator;
+            _userValidator = userValidator;
         }
 
         public IEnumerable<LockModel> GetAllLocks()
@@ -31,8 +36,7 @@ namespace Application.Services
 
         public string AddLock(LockModel lockModel)
         {
-            
-            lockModel.Validate(_lockValidator);
+            _userValidator.ValidateUserId(lockModel.OwnerId);
             var inputModel = _mapper.Map<Lock>(lockModel);
             return _lockRepository.Add(inputModel).ToString();
         }

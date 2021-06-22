@@ -26,7 +26,7 @@ namespace API.Controllers
         [Route("api/request-token")]
         [Authorize(Policy = "User")]
         public IActionResult RequestToken (TokenRequestModel tokenRequest) {
-            var returnToken = string.Empty;
+            TokenReturnModel returnToken;
             try {
                 returnToken = _tokenService.AddToken(tokenRequest);
             } catch (ModelValidationException exception) {

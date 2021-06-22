@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using Application.Validators.Interfaces;
 
@@ -11,10 +10,11 @@ namespace Application.Models
         [Required]
         public string PublicKey { get; set; }
         [Required]
-        public string OwnerId { get; set; }
+        public int OwnerId { get; set; }
 
-        public virtual void Validate(ILockValidator lockValidator) {
-            lockValidator.Validate(new LockModel { Id = LockId });
+        public virtual void Validate(ILockValidator lockValidator, IUserValidator userValidator) {
+            lockValidator.ValidateLockId(LockId);
+            userValidator.ValidateUserId(OwnerId);
         }
     }
 }

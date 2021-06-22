@@ -10,7 +10,7 @@ namespace Application.Models
         public string Email { get; set; }
 
         public virtual void Validate(IUserValidator userValidator) {
-            
+            userValidator.ValidateExistingUser(this);
         }
     }
 }

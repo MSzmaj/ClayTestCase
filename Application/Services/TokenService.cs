@@ -14,21 +14,20 @@ namespace Application.Services
     public class TokenService : ITokenService
     {
         private readonly ITokenRepository _tokenRepository;
-        private readonly ITokenValidator _tokenValidator;
         private readonly ILockValidator _lockValidator;
+        private readonly IUserValidator _userValidator;
 
         private readonly IMapper _mapper;
 
         public TokenService(ITokenRepository tokenRepository, 
                             IMapper mapper, 
-                            ITokenValidator 
-                            tokenValidator, 
-                            ILockValidator lockValidator)
+                            ILockValidator lockValidator,
+                            IUserValidator userValidator)
         {
             _tokenRepository = tokenRepository;
             _mapper = mapper;
-            _tokenValidator = tokenValidator;
             _lockValidator = lockValidator;
+            _userValidator = userValidator;
         }
 
         public IEnumerable<TokenModel> GetAllTokens()
@@ -37,11 +36,11 @@ namespace Application.Services
             return tokens.Select(x => _mapper.Map<TokenModel>(x)).ToList();
         }
 
-        public string AddToken(TokenRequestModel token)
+        public TokenReturnModel AddToken(TokenRequestModel token)
         {
-            token.Validate(_lockValidator);
+            token.Validate(_lockValidator, _userValidator);
             var inputModel = _mapper.Map<TokenRequest>(token);
-            var tokenId = _tokenRepository.Add(inputModel).ToString();
+            var tokenId = _tokenRepository.Add(inputModel);
 
             var data = new {
                 TokenId = tokenId,
@@ -50,7 +49,12 @@ namespace Application.Services
                 Expiry = DateTime.Now.AddDays(1)
             };
 
-            return CryptoUtil.Encrypt(data.ToString(), token.PublicKey);
+            var returnToken = new TokenReturnModel {
+                TokenId = tokenId,
+                Token = CryptoUtil.Encrypt(data.ToString(), token.PublicKey)
+            };
+
+            return returnToken;
         }
     }
 }

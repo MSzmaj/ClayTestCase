@@ -7,5 +7,6 @@ namespace Domain.Repositories
     {
         IEnumerable<Token> GetTokens();
         int Add(TokenRequest inputModel);
+        Token FindById(int id);
     }
 }

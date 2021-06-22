@@ -28,20 +28,36 @@ namespace Infratructure.Repositories
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { TokenQuery.Column.LockId, TokenQuery.Column.Expiry };
-            var parameters = new string[] { TokenQuery.Parameter.OwnerId, TokenQuery.Parameter.Expiry };
+            var columns = new string[] { TokenQuery.Column.LockId, TokenQuery.Column.OwnerId, TokenQuery.Column.Expiry };
+            var parameters = new string[] { TokenQuery.Parameter.LockId, TokenQuery.Parameter.OwnerId, TokenQuery.Parameter.Expiry };
 
             var query = string.Format(TokenQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
                 inputModel.LockId,
+                inputModel.OwnerId,
                 inputModel.Expiry
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);
 
-            return connection.Execute(commandDefinition);
+            return connection.ExecuteScalar<int>(commandDefinition);
+        }
+
+        public Token FindById(int tokenId) {
+            using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
+
+            var query = string.Format(TokenQuery.FindById, TokenQuery.Parameter.Id);
+
+            var queryParameters = new
+            {
+                tokenId
+            };
+
+            var commandDefinition = new CommandDefinition(query, queryParameters);
+
+            return connection.QueryFirstOrDefault<Token>(commandDefinition); 
         }
     }
 }

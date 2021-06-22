@@ -12,8 +12,14 @@ namespace Application.Models
         public bool Success { get; set; }
         public DateTime EntryDate { get; set; }
 
-        public virtual void Validate(ILogValidator logValidator) {
+        public virtual void Validate(ILogValidator logValidator,
+                                    IUserValidator userValidator,
+                                    ITokenValidator tokenValidator,
+                                    ILockValidator lockValidator) {
             
+            userValidator.ValidateUserId(UserId);
+            tokenValidator.ValidateTokenId(TokenId);
+            lockValidator.ValidateLockId(LockId);
         }
     }
 }

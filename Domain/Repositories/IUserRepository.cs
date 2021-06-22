@@ -7,5 +7,7 @@ namespace Domain.Repositories
     {
         IEnumerable<User> GetUsers();
         int Add(User inputModel);
+        User FindByCriteria(User user);
+        User FindById(int id);
     }
 }
