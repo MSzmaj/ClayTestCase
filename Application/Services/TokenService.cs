@@ -6,6 +6,8 @@ using AutoMapper;
 using System.Linq;
 using Domain.Models;
 using Application.Validators.Interfaces;
+using Common;
+using System;
 
 namespace Application.Services
 {
@@ -40,8 +42,15 @@ namespace Application.Services
             token.Validate(_lockValidator);
             var inputModel = _mapper.Map<TokenRequest>(token);
             var tokenId = _tokenRepository.Add(inputModel).ToString();
-            var bytes = System.Text.Encoding.UTF8.GetBytes(tokenId);
-            return System.Convert.ToBase64String(bytes);
+
+            var data = new {
+                TokenId = tokenId,
+                LockId = token.LockId,
+                OwnerId = token.OwnerId,
+                Expiry = DateTime.Now.AddDays(1)
+            };
+
+            return CryptoUtil.Encrypt(data.ToString(), token.PublicKey);
         }
     }
 }

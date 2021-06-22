@@ -10,6 +10,8 @@ namespace Application.Models
         public int LockId { get; set; }
         [Required]
         public string PublicKey { get; set; }
+        [Required]
+        public string OwnerId { get; set; }
 
         public virtual void Validate(ILockValidator lockValidator) {
             lockValidator.Validate(new LockModel { Id = LockId });
