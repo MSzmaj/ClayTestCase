@@ -10,19 +10,31 @@ namespace Infrastructure.DatabaseAccess.Queries
         public static readonly string[] Columns =
         {
             Column.Id,
-            Column.OwnerId
+            Column.LockId,
+            Column.UserId,
+            Column.TokenId,
+            Column.Succcess,
+            Column.EntryDate
         };
 
         public static class Column
         {
             public const string Id = "Id";
-            public const string OwnerId = "OwnerId";
+            public const string LockId = "LockId";
+            public const string UserId = "UserId";
+            public const string TokenId = "TokenId";
+            public const string Succcess = "Success";
+            public const string EntryDate = "EntryDate";
         }
 
         public static class Parameter
         {
             public const string Id = "@Id";
-            public const string OwnerId = "@OwnerId";
+            public const string LockId = "@LockId";
+            public const string UserId = "@UserId";
+            public const string TokenId = "@TokenId";
+            public const string Succcess = "@Success";
+            public const string EntryDate = "@EntryDate";
         }
 
         public static readonly string BaseQuery = "SELECT {0} FROM " + Table;

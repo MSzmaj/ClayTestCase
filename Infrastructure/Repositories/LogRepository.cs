@@ -28,13 +28,23 @@ namespace Infratructure.Repositories
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { LogQuery.Column.OwnerId};
-            var parameters = new string[] { LogQuery.Parameter.OwnerId};
+            var parameters = new string[] { 
+                LogQuery.Parameter.LockId,
+                LogQuery.Parameter.UserId,
+                LogQuery.Parameter.TokenId,
+                LogQuery.Parameter.Succcess,
+                LogQuery.Parameter.EntryDate,
+            };
 
-            var query = string.Format(LogQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
+            var query = string.Format(LogQuery.Insert, string.Join(",", LogQuery.Columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
+                inputModel.LockId,
+                inputModel.UserId,
+                inputModel.TokenId,
+                inputModel.Success,
+                inputModel.EntryDate
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);

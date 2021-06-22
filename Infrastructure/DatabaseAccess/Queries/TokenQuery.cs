@@ -10,28 +10,28 @@
         {
             Column.Id,
             Column.OwnerId,
-            Column.Expiry,
-            Column.LockId
+            Column.LockId,
+            Column.Expiry
         };
 
         public static class Column
         {
             public const string Id = "Id";
             public const string OwnerId = "OwnerId";
-            public const string Expiry = "Expiry";
             public const string LockId = "LockId";
+            public const string Expiry = "Expiry";
         }
 
         public static class Parameter
         {
             public const string Id = "@Id";
             public const string OwnerId = "@OwnerId";
-            public const string Expiry = "@Expiry";
             public const string LockId = "@LockId";
+            public const string Expiry = "@Expiry";
         }
 
         public static readonly string BaseQuery = "SELECT {0} FROM " + Table;
 
-        public static readonly string Insert = "INSERT INTO " + Table + " ({0}) VALUES ({1})";
+        public static readonly string Insert = "INSERT INTO " + Table + " ({0}) VALUES ({1}) RETURNING " + Column.Id;
     }
 }

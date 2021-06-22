@@ -28,13 +28,11 @@ namespace Infratructure.Repositories
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { LockQuery.Column.OwnerId };
-            var parameters = new string[] { LockQuery.Parameter.OwnerId };
-
-            var query = string.Format(LockQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
+            var query = string.Format(LockQuery.Insert, LockQuery.Column.OwnerId, LockQuery.Parameter.OwnerId);
 
             var queryParameters = new
             {
+                inputModel.OwnerId
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);

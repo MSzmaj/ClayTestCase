@@ -13,14 +13,20 @@ namespace Application.Services
     {
         private readonly ITokenRepository _tokenRepository;
         private readonly ITokenValidator _tokenValidator;
+        private readonly ILockValidator _lockValidator;
 
         private readonly IMapper _mapper;
 
-        public TokenService(ITokenRepository tokenRepository, IMapper mapper, ITokenValidator tokenValidator)
+        public TokenService(ITokenRepository tokenRepository, 
+                            IMapper mapper, 
+                            ITokenValidator 
+                            tokenValidator, 
+                            ILockValidator lockValidator)
         {
             _tokenRepository = tokenRepository;
             _mapper = mapper;
             _tokenValidator = tokenValidator;
+            _lockValidator = lockValidator;
         }
 
         public IEnumerable<TokenModel> GetAllTokens()
@@ -29,11 +35,13 @@ namespace Application.Services
             return tokens.Select(x => _mapper.Map<TokenModel>(x)).ToList();
         }
 
-        public string AddToken(TokenModel token)
+        public string AddToken(TokenRequestModel token)
         {
-            token.Validate(_tokenValidator);
-            var inputModel = _mapper.Map<Token>(token);
-            return _tokenRepository.Add(inputModel).ToString();
+            token.Validate(_lockValidator);
+            var inputModel = _mapper.Map<TokenRequest>(token);
+            var tokenId = _tokenRepository.Add(inputModel).ToString();
+            var bytes = System.Text.Encoding.UTF8.GetBytes(tokenId);
+            return System.Convert.ToBase64String(bytes);
         }
     }
 }

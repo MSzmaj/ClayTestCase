@@ -28,13 +28,19 @@ namespace Infratructure.Repositories
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] {  };
-            var parameters = new string[] { };
+            var parameters = new string[] { 
+                UserQuery.Parameter.FullName,
+                UserQuery.Parameter.UserName,
+                UserQuery.Parameter.Email,
+            };
 
-            var query = string.Format(UserQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
+            var query = string.Format(UserQuery.Insert, string.Join(",", TokenQuery.Columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
+                inputModel.FullName,
+                inputModel.UserName,
+                inputModel.Email
             };
 
             var commandDefinition = new CommandDefinition(query, queryParameters);

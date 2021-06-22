@@ -24,18 +24,18 @@ namespace Infratructure.Repositories
             return connection.Query<Token>(commandDefinition);
         }
 
-        public int Add(Token inputModel)
+        public int Add(TokenRequest inputModel)
         {
             using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
 
-            var columns = new string[] { TokenQuery.Column.OwnerId, TokenQuery.Column.Expiry };
+            var columns = new string[] { TokenQuery.Column.LockId, TokenQuery.Column.Expiry };
             var parameters = new string[] { TokenQuery.Parameter.OwnerId, TokenQuery.Parameter.Expiry };
 
             var query = string.Format(TokenQuery.Insert, string.Join(",", columns), string.Join(",", parameters));
 
             var queryParameters = new
             {
-                inputModel.OwnerId,
+                inputModel.LockId,
                 inputModel.Expiry
             };
 

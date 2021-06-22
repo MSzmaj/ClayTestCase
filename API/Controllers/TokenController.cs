@@ -23,10 +23,16 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("api/request-token/lockid")]
+        [Route("api/request-token")]
         [Authorize(Policy = "User")]
-        public IActionResult RequestToken (string lockId) {
-            return Ok(new TokenModel());
+        public IActionResult RequestToken (TokenRequestModel tokenRequest) {
+            var returnToken = string.Empty;
+            try {
+                returnToken = _tokenService.AddToken(tokenRequest);
+            } catch (ModelValidationException exception) {
+                return BadRequest(exception.Message);
+            }
+            return Ok(returnToken);
         }
     
         [HttpGet]
@@ -36,20 +42,6 @@ namespace API.Controllers
         {
             var tokens = _tokenService.GetAllTokens();
            return tokens.Any() ? Ok(_tokenService.GetAllTokens()) : BadRequest();
-        }
-
-        [HttpPost]
-        [Route("api/add")]
-        [Authorize(Policy = "User")]
-        public IActionResult AddToken(TokenModel inputModel)
-        {
-            var tokenId = string.Empty;
-            try {
-                tokenId = _tokenService.AddToken(inputModel);
-            } catch (ModelValidationException exception) {
-                return BadRequest(exception.Message);
-            }
-            return Ok(tokenId);
         }
     }
 }
