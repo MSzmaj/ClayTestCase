@@ -40,9 +40,9 @@ namespace Application.Validators {
 
         public void ValidateClaimId(string modelId, string claimId)
         {
-            if (modelId == claimId)
+            if (modelId != claimId)
             {
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException("Unauthorized access of user");
             }
         }
     }

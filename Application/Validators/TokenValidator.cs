@@ -1,3 +1,4 @@
+using System;
 using Application.Models;
 using Application.Validators.Interfaces;
 using Common.Exceptions;
@@ -15,6 +16,14 @@ namespace Application.Validators {
             var token = _tokenRepository.FindById(tokenId);
             if (token == null) {
                 throw new ModelValidationException($"Token with id {tokenId} does not exist");
+            }
+        }
+
+        public void ValidateOwner (int tokenId, int ownerId) {
+            ValidateTokenId(tokenId);
+            var token = _tokenRepository.FindById(tokenId);
+            if (token.OwnerId != ownerId) {
+                throw new UnauthorizedAccessException("Token id does not below to owner");
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using Application.Validators.Interfaces;
 
 namespace Application.Models
@@ -20,6 +21,18 @@ namespace Application.Models
             tokenValidator.ValidateTokenId(Id);
             userValidator.ValidateUserId(OwnerId);
             lockValidator.ValidateLockId(LockId);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append($"Id: {Id}, ");
+            sb.Append($"Expiry: {Expiry}, ");
+            sb.Append($"OwnerId: {OwnerId}, ");
+            sb.Append($"LockId: {LockId}");
+
+            return sb.ToString();
         }
     }
 }

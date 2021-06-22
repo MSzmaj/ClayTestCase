@@ -40,6 +40,7 @@ namespace Application.Services
         {
             token.Validate(_lockValidator, _userValidator);
             var inputModel = _mapper.Map<TokenRequest>(token);
+            inputModel.Expiry = DateTime.Now.AddDays(1);
             var tokenId = _tokenRepository.Add(inputModel);
 
             var data = new {

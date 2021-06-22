@@ -48,13 +48,25 @@ namespace API.OpenID
                 new TestUser
                 {
                     SubjectId = "1",
-                    Username = "test3",
+                    Username = "szmaj",
                     Password = "password",
 
                     Claims = new []
                     {
-                        new Claim("name", "Test3"),
-                        new Claim("email", "Test3@Test.com")
+                        new Claim("name", "Szmaj"),
+                        new Claim("email", "szmaj@Test.com")
+                    }
+                },
+                new TestUser
+                {
+                    SubjectId = "1",
+                    Username = "kieser",
+                    Password = "password",
+
+                    Claims = new []
+                    {
+                        new Claim("name", "Kieser"),
+                        new Claim("email", "kieser@Test.com")
                     }
                 }
             };

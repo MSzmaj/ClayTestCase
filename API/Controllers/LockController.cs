@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Common;
+using System;
 
 namespace API.Controllers {
 
@@ -30,14 +31,16 @@ namespace API.Controllers {
         [Authorize(Policy = "User")]
         public IActionResult RegisterLock (LockModel lockModel) {
             _logger.LogInformation($"RegisterLock called with {lockModel.ToString()}");
-            _userValidator.ValidateClaimId(lockModel.OwnerId.ToString(),
-                User.Identity.GetClaimId().ToString());
 
             string lockId;
             try {
+                _userValidator.ValidateClaimId(lockModel.OwnerId.ToString(),
+                                                User.Identity.GetClaimId().ToString());
                 lockId = _lockService.AddLock(lockModel);
             } catch (ModelValidationException exception) {
                 return BadRequest(exception.Message);
+            } catch (UnauthorizedAccessException exception) {
+                return Unauthorized(exception.Message);
             }
             return Ok(lockId);
         }

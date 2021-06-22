@@ -1,3 +1,4 @@
+using System.Text;
 using Application.Validators.Interfaces;
 
 namespace Application.Models
@@ -11,6 +12,18 @@ namespace Application.Models
 
         public virtual void Validate(IUserValidator userValidator) {
             userValidator.ValidateExistingUser(this);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append($"Id: {Id}, ");
+            sb.Append($"FullName: {FullName}, ");
+            sb.Append($"UserName: {UserName}, ");
+            sb.Append($"Email: {Email}");
+
+            return sb.ToString();
         }
     }
 }

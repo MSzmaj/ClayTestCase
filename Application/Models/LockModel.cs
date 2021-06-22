@@ -1,3 +1,4 @@
+using System.Text;
 using Application.Validators.Interfaces;
 
 namespace Application.Models
@@ -12,6 +13,16 @@ namespace Application.Models
                                     IUserValidator userValidator) {
             lockValidator.ValidateLockId(Id);
             userValidator.ValidateUserId(OwnerId);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append($"Id: {Id}, ");
+            sb.Append($"OwnerId: {OwnerId}");
+
+            return sb.ToString();
         }
     }
 }

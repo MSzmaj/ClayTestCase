@@ -7,5 +7,6 @@ namespace Application.Services.Interfaces
     {
         IEnumerable<LogModel> GetAllLogs();
         string AddLog(LogModel log);
+        IEnumerable<LogModel> GetLockLogs(LogModel log);
     }
 }
