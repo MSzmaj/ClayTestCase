@@ -20,6 +20,7 @@ namespace API.Controllers
         [AllowAnonymous]
         public IActionResult HealthCheck()
         {
+            _logger.LogInformation("HealthCheck called");
             return Ok("API is running");
         }
     }

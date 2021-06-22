@@ -23,6 +23,7 @@ namespace API.Controllers {
         [Route("api/log-entry")]
         [Authorize(Policy = "User")]
         public IActionResult LogEntry (LogModel log) {
+            _logger.LogInformation($"LogEntry called with {log.ToString()}");
             try {
                 _logService.AddLog(log);
             } catch (ValidationException exception) {
@@ -36,6 +37,7 @@ namespace API.Controllers {
         [Authorize(Policy = "Admin")]
         public IActionResult GetAllLogs()
         {
+            _logger.LogInformation("GetAllLogs called");
             var logs = _logService.GetAllLogs();
             return logs.Any() ? Ok(logs) : BadRequest();
         }

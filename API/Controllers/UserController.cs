@@ -23,8 +23,8 @@ namespace API.Controllers {
         [Route("api/register-user")]
         [Authorize(Policy = "User")]
         public IActionResult RegisterUser (UserModel user) {
+            _logger.LogInformation($"RegisterUser called with {user.ToString()}");
             var userId = string.Empty;
-
             try {
                 userId = _userService.AddUser(user);
             } catch (ModelValidationException exception) {
@@ -38,6 +38,7 @@ namespace API.Controllers {
         [Authorize(Policy = "Admin")]
         public IActionResult GetAllUsers()
         {
+            _logger.LogInformation("GetAllUsers called");
             var users = _userService.GetAllUsers();
             return users.Any() ? Ok(users) : BadRequest();
         }

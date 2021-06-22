@@ -29,6 +29,7 @@ namespace API.Controllers {
         [Route("api/register-lock")]
         [Authorize(Policy = "User")]
         public IActionResult RegisterLock (LockModel lockModel) {
+            _logger.LogInformation($"RegisterLock called with {lockModel.ToString()}");
             _userValidator.ValidateClaimId(lockModel.OwnerId.ToString(),
                 User.Identity.GetClaimId().ToString());
 
@@ -46,6 +47,7 @@ namespace API.Controllers {
         [Authorize(Policy = "Admin")]
         public IActionResult GetAllLocks()
         {
+            _logger.LogInformation("GetAllLocks called");
             var locks = _lockService.GetAllLocks();
             return locks.Any() ? Ok(locks) : BadRequest();
         }
