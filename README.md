@@ -11,7 +11,7 @@
 # Project Info
 
 ### C# and .NET 5.0
-I created the service using C# and .NET 5.0. It's an SOA style application that consists of an API, Application, Domain, and Infrastructure (Repository) layers. This allows each layer to be loosely coupled for easy interchangability. Everything is built with testing in mind; this means heavy use of interfaces.
+I created the service using C# and .NET 5.0. It's an SOA style application that consists of an API, Application, Domain, and Infrastructure (Repository) layers. This allows each layer to be loosely coupled for easy interchangability. Everything is built with testing in mind; this means heavy use of interfaces. The service is deployed to: https://claytestcase.azurewebsites.net/ 
 Reasons for use:
 - I am the most comfortable with C# and .NET for building web services.
 - Both are widely used and being worked on by Microsoft.
