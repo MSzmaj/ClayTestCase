@@ -12,6 +12,7 @@
 
 ### C# and .NET 5.0
 I created the service using C# and .NET 5.0. It's an SOA style application that consists of an API, Application, Domain, and Infrastructure (Repository) layers. This allows each layer to be loosely coupled for easy interchangability. Everything is built with testing in mind; this means heavy use of interfaces. The service is deployed to: https://claytestcase.azurewebsites.net/ 
+
 Reasons for use:
 - I am the most comfortable with C# and .NET for building web services.
 - Both are widely used and being worked on by Microsoft.
@@ -20,6 +21,7 @@ Reasons for use:
 
 ### Docker, Github, and Azure
 I've created a dockerfile and image and deployed it to Azure. This is an automatic process as soon as the user merges in code into the master branch.
+
 Reasons for use:
 - Highly reliable and industry standard.
 - Integrates well with .NET applications.
@@ -28,6 +30,7 @@ Reasons for use:
 
 ### Postgres Database
 I'm using a Postgres database that is deployed in an Azure container. The database server contains a database for the service and one for unit tests.
+
 Reasons for use:
 - Highly reliable, industry standard database.
 - Easy integration with Azure.
@@ -35,6 +38,7 @@ Reasons for use:
 
 ### IdentityServer4
 I used IS4 for my OAuth/OpenID provider. I've not implemented any user authentication because in my opinion that should be done by a separate service that would authenticate the client. This service operates on the assumption that the client is authenticated. There are two scopes: Admin and User. Both are allowed certain API endpoints and Authorization happens on each endpoint.
+
 Reasons for use:
 - Industry standard and best practise.
 - Relatively easy implementation and is easily extended for more scopes/clients.
