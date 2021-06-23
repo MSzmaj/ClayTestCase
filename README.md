@@ -7,6 +7,8 @@ The service is an SOA style application that consists of an API, Application, Do
 
 The service is deployed to: https://claytestcase.azurewebsites.net/ 
 
+You can view the swagger API docs here: https://claytestcase.azurewebsites.net/swagger/index.html
+
 ### Assumptions
 - The front-end app / webapp (client) is using an authentication server for the user. The client is then authenticated using OpenId/OAuth for all transactions to this service.
 - The lock uses public/private key cryptography and the client is able to pass the public key over to the service.
