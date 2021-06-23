@@ -21,7 +21,11 @@ The main workflow of the client and application is as follows (this is under the
 4. The phone unlocks the lock with the token. The token has an expiry date and the client will have to request a new token after this token expires.
 5. Everytime the lock is unlocked the client will send a log entry to the service to log a successful entry.
 
-![Workflow](Images/Diagram1.png)
+![Workflow](Assets/Diagram1.png)
+
+### Demo
+You can download the demo video here.
+![Demo](Assets/API-Demo.mp4)
 
 ### Logging
 - All user token requests all logged into the database and users can get a list of logs that are associated with their locks or their user ID.
