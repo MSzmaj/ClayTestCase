@@ -9,5 +9,7 @@ namespace Domain.Repositories
         int Add(User inputModel);
         User FindByCriteria(User user);
         User FindById(int id);
+
+        void Delete(int id);
     }
 }

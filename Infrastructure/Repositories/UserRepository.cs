@@ -1,4 +1,4 @@
-    using System.Collections.Generic;
+using System.Collections.Generic;
 using Common.Config;
 using Domain.Models;
 using Domain.Repositories;
@@ -9,9 +9,9 @@ using Infrastructure.DatabaseAccess.Queries;
 namespace Infratructure.Repositories
 {
     public class UserRepository : IUserRepository {
-        private readonly AppConfig _appConfig;
+        private readonly IAppConfig _appConfig;
 
-        public UserRepository(AppConfig appConfig)
+        public UserRepository(IAppConfig appConfig)
         {
             _appConfig = appConfig;
         }
@@ -77,6 +77,25 @@ namespace Infratructure.Repositories
             var commandDefinition = new CommandDefinition(query, queryParameters);
 
             return connection.QueryFirstOrDefault<User>(commandDefinition); 
+        }
+
+        public void Delete(int id) {
+           using var connection = new NpgsqlConnection(_appConfig.GetDbConnectionString());
+
+            var parameters = new string[] { 
+                UserQuery.Parameter.Id
+            };
+
+            var query = string.Format(UserQuery.Delete, UserQuery.Parameter.Id);
+
+            var queryParameters = new
+            {
+                id
+            };
+
+            var commandDefinition = new CommandDefinition(query, queryParameters);
+
+            connection.Execute(commandDefinition); 
         }
     }
 }

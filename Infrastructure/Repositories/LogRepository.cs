@@ -9,9 +9,9 @@ using Infrastructure.DatabaseAccess.Queries;
 namespace Infratructure.Repositories
 {
     public class LogRepository : ILogRepository {
-        private readonly AppConfig _appConfig;
+        private readonly IAppConfig _appConfig;
 
-        public LogRepository(AppConfig appConfig)
+        public LogRepository(IAppConfig appConfig)
         {
             _appConfig = appConfig;
         }

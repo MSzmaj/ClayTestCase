@@ -9,9 +9,9 @@ using Infrastructure.DatabaseAccess.Queries;
 namespace Infratructure.Repositories
 {
     public class TokenRepository : ITokenRepository {
-        private readonly AppConfig _appConfig;
+        private readonly IAppConfig _appConfig;
 
-        public TokenRepository(AppConfig appConfig)
+        public TokenRepository(IAppConfig appConfig)
         {
             _appConfig = appConfig;
         }

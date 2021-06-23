@@ -3,7 +3,7 @@ using System;
 
 namespace Common.Config
 {
-    public sealed class AppConfig
+    public sealed class AppConfig : IAppConfig
     {
         private readonly IConfiguration _configuration;
 
@@ -18,5 +18,9 @@ namespace Common.Config
             var connectionPassword = $"Password={_configuration["ConnectionStringPassword"]}";
             return $"{connectionString}{connectionPassword}";
         }
+    }
+
+    public interface IAppConfig {
+        string GetDbConnectionString();
     }
 }

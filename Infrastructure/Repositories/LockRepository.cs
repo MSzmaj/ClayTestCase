@@ -9,9 +9,9 @@ using Infrastructure.DatabaseAccess.Queries;
 namespace Infratructure.Repositories
 {
     public class LockRepository : ILockRepository {
-        private readonly AppConfig _appConfig;
+        private readonly IAppConfig _appConfig;
 
-        public LockRepository(AppConfig appConfig)
+        public LockRepository(IAppConfig appConfig)
         {
             _appConfig = appConfig;
         }

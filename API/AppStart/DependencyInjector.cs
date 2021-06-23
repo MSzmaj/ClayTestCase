@@ -13,7 +13,7 @@ namespace API.AppStart
     {
         public static void ConfigureDependencies(IServiceCollection services)
         {
-            services.AddSingleton<AppConfig>();
+            services.AddSingleton<IAppConfig, AppConfig>();
             ConfigureRepositories(services);
             ConfigureValidators(services);
             ConfigureServices(services);

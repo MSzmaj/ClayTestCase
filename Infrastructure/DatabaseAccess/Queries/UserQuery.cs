@@ -31,6 +31,8 @@
 
         public static readonly string BaseQuery = "SELECT {0} FROM " + Table;
 
+        public static readonly string Delete = "DELETE FROM " + Table + " WHERE " + Column.Id + " = {0}";
+
         public static readonly string Insert = "INSERT INTO " + Table + " ({0}) VALUES ({1}) RETURNING " + Column.Id;
 
         public static readonly string FindById = string.Format(BaseQuery, Column.Id + "," + string.Join(",", Columns)) + " WHERE " + Column.Id + " = {0}";
