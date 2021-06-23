@@ -12,8 +12,8 @@ namespace API.AppStart
             services.AddAuthentication(Constants.Auth.Bearer)
                 .AddIdentityServerAuthentication(Constants.Auth.Bearer, options =>
                 {
-                    options.Authority = "https://localhost:5001";
-                    //options.Authority = "https://claytestcase.azurewebsites.net";
+                    //options.Authority = "https://localhost:5001";
+                    options.Authority = "https://claytestcase.azurewebsites.net";
                     options.RequireHttpsMetadata = false;
                 });
 
