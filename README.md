@@ -1,11 +1,11 @@
 # ClayTestCase
 
-#Assumptions
+# Assumptions
 - The front-end app / webapp (client) is using an authentication server for the user. The client is then authenticated using OpenId/OAuth for all transactions to this service.
 - The lock uses public/private key cryptography and the client is able to pass the public key over to the service.
     - Note the service is not actually encrypting anything as this is just a demo.
 - The lock is not calling the service itself. The client does all of the work here. See diagram below.
-![Workflow](Images\Diagram1.png)
+![Workflow](Images/Diagram1.png)
 
 
 # Project Info
