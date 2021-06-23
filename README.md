@@ -1,17 +1,30 @@
 # ClayTestCase
 
-# Assumptions
+# Project Info
+
+### The Service
+The service is an SOA style application that consists of an API, Application, Domain, and Infrastructure (Repository) layers. This allows each layer to be loosely coupled for easy interchangability and development. Everything is built with testing in mind; this means heavy use of interfaces.
+
+The service is deployed to: https://claytestcase.azurewebsites.net/ 
+
+### Assumptions
 - The front-end app / webapp (client) is using an authentication server for the user. The client is then authenticated using OpenId/OAuth for all transactions to this service.
 - The lock uses public/private key cryptography and the client is able to pass the public key over to the service.
     - Note the service is not actually encrypting anything as this is just a demo.
 - The lock is not calling the service itself. The client does all of the work here. See diagram below.
+
+### Workflow
+The main workflow of the client and application is as follows (this is under the assumption that the client is already authenticated):
+1. The client (webapp or app) pairs with the lock via bluetooth (or wifi).
+2. The client sends a request to the service.
+3. The service processes the request and sends back a token for the client to store. This involves generating a token and encrypting it with the locks public key (encryption not implemented).
+4. The phone unlocks the lock with the token. The token has an expiry date and the client will have to request a new token after this token expires.
+5. Everytime the lock is unlocked the client will send a log entry to the service to log a successful entry.
+
 ![Workflow](Images/Diagram1.png)
 
-
-# Project Info
-
-### C# and .NET 5.0
-I created the service using C# and .NET 5.0. It's an SOA style application that consists of an API, Application, Domain, and Infrastructure (Repository) layers. This allows each layer to be loosely coupled for easy interchangability. Everything is built with testing in mind; this means heavy use of interfaces. The service is deployed to: https://claytestcase.azurewebsites.net/ 
+### C# and .NET 5
+I created the service using C# and .NET 5.0.
 
 Reasons for use:
 - I am the most comfortable with C# and .NET for building web services.
