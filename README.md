@@ -72,7 +72,7 @@ Rather than using Entity Framework I opted for a simple ORM simply because this 
 There were a few things that I would have liked to have added and/or finished but due to time constraints did not.
 - Connection pooling configuration for NpgSql. I've left it at the default but it does allow for connecting pooling.
 - Integration tests. I didn't add any integration tests, but this would have been the next logical step.
-- Unfinished unit tests. I've completed some of the unit tests which should show how I go about writing them.
+- Unfinished unit tests. I've completed some of the unit tests which should show how I go about writing them. I did not try to do TDD this time as I think the exercise was try to build this in an agile approach. Writing unit tests for such a service takes quite a bit of time.
 - A front end client and authentication service.
 - Feature branches and merge functionality in the deployment github action. Currently as soon as you push to `master` the Action deploys straight to the Azure container. Ideally I'd have a feature branch and it would only deploy once merged.
 - Github unit test status. I'd like the unit test and code coverage to show up on the github page.
