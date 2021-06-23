@@ -1,5 +1,3 @@
-# ClayTestCase
-
 # Project Info
 
 ### The Service
