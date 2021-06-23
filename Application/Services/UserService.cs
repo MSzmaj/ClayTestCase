@@ -29,11 +29,11 @@ namespace Application.Services
             return users.Select(x => _mapper.Map<UserModel>(x)).ToList();
         }
 
-        public string AddUser(UserModel user)
+        public int AddUser(UserModel user)
         {
             user.Validate(_userValidator);
             var inputModel = _mapper.Map<User>(user);
-            return _userRepository.Add(inputModel).ToString();
+            return _userRepository.Add(inputModel);
         }
     }
 }

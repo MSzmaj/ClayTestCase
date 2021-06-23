@@ -6,6 +6,6 @@ namespace Application.Services.Interfaces
     public interface IUserService
     {
         IEnumerable<UserModel> GetAllUsers();
-        string AddUser(UserModel user);
+        int AddUser(UserModel user);
     }
 }

@@ -48,13 +48,23 @@ namespace Tests.RepositoryTests
         [Test]
         public void Add_Test() {
             //Arrange
+            var user = new User {
+                FullName = "Test Test",
+                UserName = "Test",
+                Email = "Email@Email.com"
+            };
 
             //Act
+            var id = _sut.Add(user);
+            var returnUser = _sut.FindById(id);
 
             //Assert
+            returnUser.FullName.Should().BeEquivalentTo(user.FullName);
+            returnUser.UserName.Should().BeEquivalentTo(user.UserName);
+            returnUser.Email.Should().BeEquivalentTo(user.Email);
 
             //Clean Up
-            
+            _sut.Delete(id);
         }
     }   
 }

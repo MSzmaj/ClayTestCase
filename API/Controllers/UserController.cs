@@ -24,7 +24,7 @@ namespace API.Controllers {
         [Authorize(Policy = "User")]
         public IActionResult RegisterUser (UserModel user) {
             _logger.LogInformation($"RegisterUser called with {user.ToString()}");
-            var userId = string.Empty;
+            int userId;
             try {
                 userId = _userService.AddUser(user);
             } catch (ModelValidationException exception) {
