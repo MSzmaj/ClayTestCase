@@ -23,8 +23,12 @@ The main workflow of the client and application is as follows (this is under the
 
 ![Workflow](Images/Diagram1.png)
 
+### Logging
+- All user token requests all logged into the database and users can get a list of logs that are associated with their locks or their user ID.
+- Every API call is logged on the application server. This way stacktraces have the complete set of input data.
+
 ### C# and .NET 5
-I created the service using C# and .NET 5.0.
+The service was created using C# and .NET 5.0. It incorporates a variety of industry best practises and thoughtful design patterns that allow for easy extendability and development.
 
 Reasons for use:
 - I am the most comfortable with C# and .NET for building web services.
